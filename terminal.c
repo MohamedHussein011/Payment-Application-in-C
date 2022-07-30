@@ -8,8 +8,8 @@
 #include <time.h>
 #include <ctype.h>
 
-#include "../STD_TYPE.h"
-#include "../Card/card.h"
+#include "STD_TYPE.h"
+#include "card.h"
 #include "terminal.h"
 
 EN_terminalError_t getTransactionDate(ST_terminalData_t *termData)

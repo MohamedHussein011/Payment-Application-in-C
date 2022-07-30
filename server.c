@@ -1,3 +1,6 @@
+/*
+ * Name: Mohamed Hussein Mohamed Salem
+ */
 #include <stdio.h>
 #include <string.h>
 

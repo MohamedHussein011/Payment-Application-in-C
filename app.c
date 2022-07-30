@@ -6,7 +6,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include "../STD_TYPE.h"
+#include "STD_TYPE.h"
 
 #include "card.h"
 #include "terminal.h"

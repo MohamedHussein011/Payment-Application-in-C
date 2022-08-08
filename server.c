@@ -2,10 +2,10 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "../STD_TYPE.h"
+#include "STD_TYPE.h"
 
-#include "../Card/card.h"
-#include "../Terminal/terminal.h"
+#include "card.h"
+#include "terminal.h"
 
 #include "server.h"
 

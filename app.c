@@ -3,11 +3,11 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include "../STD_TYPE.h"
+#include "STD_TYPE.h"
 
-#include "../Card/card.h"
-#include "../Terminal/terminal.h"
-#include "../Server/server.h"
+#include "card.h"
+#include "terminal.h"
+#include "server.h"
 #include "app.h"
 
 extern ST_accountsDB_t accountsDataBase[255];

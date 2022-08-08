@@ -7,7 +7,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#include "../STD_TYPE.h"
+#include "STD_TYPE.h"
 
 #include "card.h"
 

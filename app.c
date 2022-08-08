@@ -1,16 +1,13 @@
-/*
- * Name: Mohamed Hussein Mohamed Salem
- */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
 
-#include "STD_TYPE.h"
+#include "../STD_TYPE.h"
 
-#include "card.h"
-#include "terminal.h"
-#include "server.h"
+#include "../Card/card.h"
+#include "../Terminal/terminal.h"
+#include "../Server/server.h"
 #include "app.h"
 
 extern ST_accountsDB_t accountsDataBase[255];
@@ -151,59 +148,87 @@ void appStart(void)
 				}
 			}else if(choice == 2)
 			{
-				if(userData.transState == DECLINED_STOLEN_CARD)
+				TransStateError = isValidAccount(&userData.cardHolderData);
+				if (TransStateError == DECLINED_STOLEN_CARD)
 				{
-					printf("Declined Invalid Account or Blocked Account!\n\n");
+					printf("Declined Invalid Account or Blocked Account!\n");
+					break;
 				}else{
-					printf("Enetr Transaction sequence number to be searched:  "); fflush(stdout);
-					scanf("%d",&number);
-					ServerError = getTransaction(number, &userData);
-					if(ServerError == ACCOUNT_NOT_FOUND)
+					if(userData.transState == DECLINED_STOLEN_CARD)
 					{
-						printf("Declined Invalid Account!\n");
-						break;
-					}else if(ServerError == TRANSACTION_NOT_FOUND)
-					{
-						printf("Declined TRANSACTION NOT FOUND!\n");
-						break;
+						printf("Declined Invalid Account or Blocked Account!\n\n");
+					}else{
+						printf("Enetr Transaction sequence number to be searched:  "); fflush(stdout);
+						scanf("%d",&number);
+						ServerError = getTransaction(number, &userData);
+						if(ServerError == ACCOUNT_NOT_FOUND)
+						{
+							printf("Declined Invalid Account!\n");
+							break;
+						}else if(ServerError == TRANSACTION_NOT_FOUND)
+						{
+							printf("Declined TRANSACTION NOT FOUND!\n");
+							break;
+						}
+						printf("Transaction sequence number: %d\n",userData.transactionSequenceNumber);
+						printf("Details of the Transaction owner.\n");
+						printf("Name: %s.\n",userData.cardHolderData.cardHolderName);
+						printf("PAN: %s.\n",userData.cardHolderData.primaryAccountNumber);
+						printf("Transaction Date: %s.\n",userData.terminalData.transactionDate);
+						printf("Transaction money = %0.4f.\n",userData.terminalData.transAmount);
+						printf("Current Balance = %0.4f.\n",accountsDataBase[member].balance);
 					}
-					printf("Transaction sequence number: %d\n",userData.transactionSequenceNumber);
-					printf("Details of the Transaction owner.\n");
-					printf("Name: %s.\n",userData.cardHolderData.cardHolderName);
-					printf("PAN: %s.\n",userData.cardHolderData.primaryAccountNumber);
-					printf("Transaction Date: %s.\n",userData.terminalData.transactionDate);
-					printf("Transaction money = %0.4f.\n",userData.terminalData.transAmount);
-					printf("Current Balance = %0.4f.\n",accountsDataBase[member].balance);
 				}
 			}else if(choice == 3)
 			{
-				if(userData.transState == DECLINED_STOLEN_CARD)
+				TransStateError = isValidAccount(&userData.cardHolderData);
+				if (TransStateError == DECLINED_STOLEN_CARD)
 				{
-					printf("Declined Invalid Account or Blocked Account!\n\n");
+					printf("Declined Invalid Account or Blocked Account!\n");
+					break;
 				}else{
-					balance = accountsDataBase[member].balance;
-					printf("Your curent balance is %0.4f.\n",balance);
+					if(userData.transState == DECLINED_STOLEN_CARD)
+					{
+						printf("Declined Invalid Account or Blocked Account!\n\n");
+					}else{
+						balance = accountsDataBase[member].balance;
+						printf("Your curent balance is %0.4f.\n",balance);
+					}        
 				}
 			}else if(choice == 4)
 			{
-				if(userData.transState == DECLINED_STOLEN_CARD)
+				TransStateError = isValidAccount(&userData.cardHolderData);
+				if (TransStateError == DECLINED_STOLEN_CARD)
 				{
-					printf("Declined Invalid Account or Blocked Account!\n\n");
+					printf("Declined Invalid Account or Blocked Account!\n");
+					break;
 				}else{
-					printf("Enter the amount of money: "); fflush(stdout);
-					scanf("%f",&deposit);
-					accountsDataBase[member].balance += deposit;
-					printf("Current Balance = %0.4f.\n",accountsDataBase[member].balance);
-					printf("Amount added successfully.\n");
+					if(userData.transState == DECLINED_STOLEN_CARD)
+					{
+						printf("Declined Invalid Account or Blocked Account!\n\n");
+					}else{
+						printf("Enter the amount of money: "); fflush(stdout);
+						scanf("%f",&deposit);
+						accountsDataBase[member].balance += deposit;
+						printf("Current Balance = %0.4f.\n",accountsDataBase[member].balance);
+						printf("Amount added successfully.\n");
+					}
 				}
 			}else if(choice == 5)
 			{
-				if(userData.transState == DECLINED_STOLEN_CARD)
+				TransStateError = isValidAccount(&userData.cardHolderData);
+				if (TransStateError == DECLINED_STOLEN_CARD)
 				{
-					printf("Declined Invalid Account or Blocked Account!\n\n");
+					printf("Declined Invalid Account or Blocked Account!\n");
+					break;
 				}else{
-					userData.transState = DECLINED_STOLEN_CARD;
-					printf("Reported successfully.\n\n");
+					if(userData.transState == DECLINED_STOLEN_CARD)
+					{
+						printf("Declined Invalid Account or Blocked Account!\n\n");
+					}else{
+						userData.transState = DECLINED_STOLEN_CARD;
+						printf("Reported successfully.\n\n");
+					}
 				}
 				
 			}else if(choice == 6)

@@ -7,7 +7,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#include "STD_TYPE.h"
+#include "../STD_TYPE.h"
 
 #include "card.h"
 
@@ -87,6 +87,7 @@ EN_cardError_t getCardExpiryDate(ST_cardData_t *cardData)
 	if((cardData -> cardExpirationDate[0] - '0' == 1) && (cardData -> cardExpirationDate[1] - '0' > 2))
 		return WRONG_EXP_DATE;
 	
+	/*check if expiration date year is less than 20 or not */
 	if(cardData -> cardExpirationDate[3] - '0' < 2)
 		return WRONG_EXP_DATE;
 	

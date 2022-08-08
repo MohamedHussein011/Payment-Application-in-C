@@ -1,13 +1,11 @@
-/*
- * Name: Mohamed Hussein Mohamed Salem
- */
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
-#include "STD_TYPE.h"
+#include "../STD_TYPE.h"
 
-#include "card.h"
-#include "terminal.h"
+#include "../Card/card.h"
+#include "../Terminal/terminal.h"
 
 #include "server.h"
 
@@ -95,7 +93,7 @@ EN_serverError_t saveTransaction(ST_transaction_t *transData)
 	transactionDataBase[member].terminalData = transData->terminalData;
 	transactionDataBase[member].transState = transData->transState;
 	
-	transData->transactionSequenceNumber = 28072022 + iterator;
+	transData->transactionSequenceNumber = rand();
 	transactionDataBase[member].transactionSequenceNumber = transData->transactionSequenceNumber;
 
 	if(transactionDataBase[member].transactionSequenceNumber == 0)
